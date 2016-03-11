@@ -85,6 +85,5 @@ typedef AnyData BevNodeOutputParam;
 
 typedef unsigned int u32;
 
-// 提交测试
 
 #endif /* __APPMACROS_H__ */

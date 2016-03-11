@@ -14,6 +14,7 @@
 
 class BevNodePrecondition {
 public:
+    virtual ~BevNodePrecondition() {}
     virtual bool ExternalCondition(const BevNodeInputParam& input) = 0;
 };
 
