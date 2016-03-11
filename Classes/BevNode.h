@@ -10,13 +10,21 @@
 
 #include <string>
 #include "AppMacros.h"
-
+#include "CoreTypes.h"
+#include "BevNodePrecondition.h"
 class BevNode {
 public:
+//    BevNode(BevNode*)
     
     
-    
-    
+private:
+    BevNode* mao_ChildNodeList[k_BLimited_MaxChildNodeCnt];
+    u32 mul_ChildNodeCount;
+    BevNode* mo_ParentNode;
+    BevNode* mo_ActiveNode;
+    BevNode* mo_LastActiveNode;
+    BevNodePrecondition* mo_NodePreconditon;
+    std::string mz_DebugName;
 };
 
 
