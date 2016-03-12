@@ -23,7 +23,7 @@ public:
         , mui_CurrentSelectIndex(k_BLimited_InvalidChildNodeIndex)
     {}
     
-    virtual bool _DoEvalute(const BevNodeInputParam& input) override;
+    virtual bool _DoEvaluate(const BevNodeInputParam& input) override;
     virtual void _DoTransition(const BevNodeInputParam& input) override;
     virtual BevRunningStatus _DoTick(const BevNodeInputParam& input, BevNodeOutputParam& output) override;
 protected:

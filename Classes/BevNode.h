@@ -36,7 +36,7 @@ public:
     }
     
     bool Evaluate(const BevNodeInputParam& input) {
-        return (mo_NodePreconditon == nullptr || mo_NodePreconditon->ExternalCondition(input)) && _DoEvalute(input);
+        return (mo_NodePreconditon == nullptr || mo_NodePreconditon->ExternalCondition(input)) && _DoEvaluate(input);
     }
     
     void Transition(const BevNodeInputParam& input) {
@@ -89,7 +89,7 @@ public:
     }
     
 protected:
-    virtual bool _DoEvalute(const BevNodeInputParam& input) {
+    virtual bool _DoEvaluate(const BevNodeInputParam& input) {
         return true;
     }
     
@@ -107,7 +107,7 @@ protected:
     bool _bCheckIndex(u32 _ui_Index) const {
         return _ui_Index < mul_ChildNodeCount;
     }
-private:
+protected:
     BevNode* mao_ChildNodeList[k_BLimited_MaxChildNodeCnt];
     u32 mul_ChildNodeCount;
     BevNode* mo_ParentNode;

@@ -9,7 +9,7 @@
 #include "BevNodePrioritySelector.h"
 
 
-bool BevNodePrioritySelector::_DoEvalute(const BevNodeInputParam& input) {
+bool BevNodePrioritySelector::_DoEvaluate(const BevNodeInputParam& input) {
     mui_CurrentSelectIndex = k_BLimited_InvalidChildNodeIndex;
     for (unsigned int i = 0; i < mul_ChildNodeCount; ++i) {
         BevNode* oBN = mao_ChildNodeList[i];
