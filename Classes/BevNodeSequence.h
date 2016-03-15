@@ -15,6 +15,7 @@
 
 class BevNodeSequence : public BevNode
 {
+public:
     BevNodeSequence(BevNode* _o_ParentNode,BevNodePrecondition* _o_NodePrecondition = nullptr)
         : BevNode(_o_ParentNode,_o_NodePrecondition)
         , mui_CurrentNodeIndex(k_BLimited_InvalidChildNodeIndex)

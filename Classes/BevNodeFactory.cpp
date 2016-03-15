@@ -42,13 +42,13 @@ BevNode& BevNodeFactory::CreateLoopNode(BevNode* _o_Parent, const char* _debugNa
     return (*pReturn);
 }
 
-template<typename T>
-BevNode& BevNodeFactory::CreateTeminalNode(BevNode* _o_Parent, const char* _debugName);
-{
-    BevNodeTerminal* pReturn = new T(_o_Parent);
-    oCreateNodeCommon(pReturn, _o_Parent, _debugName);
-    return (*pReturn);
-}
+//template<typename T>
+//BevNode& BevNodeFactory::CreateTeminalNode(BevNode* _o_Parent, const char* _debugName)
+//{
+//    BevNodeTerminal* pReturn = new T(_o_Parent);
+//    CreateNodeCommon(pReturn, _o_Parent, _debugName);
+//    return (*pReturn);
+//}
 
 
 void BevNodeFactory::CreateNodeCommon(BevNode* _o_Me,BevNode* _o_Parent,const char* _debugName) {

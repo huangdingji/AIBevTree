@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include "BevNode.h"
+#include "BevNodeTerminal.h"
+//class BevNodeTerminal;
 
 class BevNodeFactory {
 public:
@@ -19,13 +21,13 @@ public:
     static BevNode& CreateNonePrioritySelectorNode(BevNode* _o_Parent, const char* _debugName);
     static BevNode& CreateSequenceNode(BevNode* _o_Parent, const char* _debugName);
     static BevNode& CreateLoopNode(BevNode* _o_Parent, const char* _debugName, int _i_LoopCount);
-//    template<typename T>
-    static BevNode& oCreateTeminalNode(BevNode* _o_Parent, const char* _debugName);
-//    {
-//        BevNodeTerminal* pReturn = new T(_o_Parent);
-//        oCreateNodeCommon(pReturn, _o_Parent, _debugName);
-//        return (*pReturn);
-//    }
+    template<typename T>
+    static BevNode& CreateTeminalNode(BevNode* _o_Parent, const char* _debugName)
+    {
+        T* pReturn = new T(_o_Parent);
+        CreateNodeCommon(pReturn, _o_Parent, _debugName);
+        return (*pReturn);
+    }
 private:
     static void CreateNodeCommon(BevNode* _o_Me,BevNode* _o_Parent,const char* _debugName);
     

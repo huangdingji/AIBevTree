@@ -12,6 +12,17 @@
 #include "AppMacros.h"
 #include "CoreTypes.h"
 #include "BevNodePrecondition.h"
+
+static bool printFasle() {
+    CCLOG("false");
+    return false;
+}
+
+static bool printTrue() {
+    CCLOG("true");
+    return true;
+}
+
 class BevNode {
 public:
     BevNode(BevNode* _o_ParentNode,BevNodePrecondition* o_NodeScript = nullptr)

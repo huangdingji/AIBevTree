@@ -13,12 +13,12 @@ bool BevNodePrioritySelector::_DoEvaluate(const BevNodeInputParam& input) {
     mui_CurrentSelectIndex = k_BLimited_InvalidChildNodeIndex;
     for (unsigned int i = 0; i < mul_ChildNodeCount; ++i) {
         BevNode* oBN = mao_ChildNodeList[i];
-        if (oBN->Evaluate(input) {
+        if (oBN->Evaluate(input)) {
             mui_CurrentSelectIndex = i;
             return true;
         }
     }
-    return false
+    return false;
 }
 void BevNodePrioritySelector::_DoTransition(const BevNodeInputParam& input) {
     if (_bCheckIndex(mui_LastSelectIndex)) {

@@ -12,7 +12,11 @@
 class AnyData {
 public:
     template<typename RealDataType>
-    AnyData& GetRealDataType() {
+    AnyData(RealDataType* data)
+        : m_RealData(data)
+    {}
+    template<typename RealDataType>
+    RealDataType& GetRealDataType() {
         return *reinterpret_cast<RealDataType*>(m_RealData);
     }
     template<typename RealDataType>

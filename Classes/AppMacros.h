@@ -83,7 +83,37 @@ enum E_TerminalNodeStaus
 typedef AnyData BevNodeInputParam;
 typedef AnyData BevNodeOutputParam;
 
+typedef unsigned char u8;
+typedef unsigned short u16;
 typedef unsigned int u32;
+
+typedef const char*  StringPtr;
+
+typedef float f32;
+typedef double f64;
+
+/************************************************************************/
+/* static		-- s
+ const		-- k
+ unsigned     -- u
+ pointer      -- po
+ integer      -- i
+ float        -- f
+ boolean      -- b
+ char         -- c
+ string		-- str
+ array        -- ar
+ list         -- li
+ hashmap      -- hm
+ parameter    -- p_
+ member       -- m_
+ local		-- l_
+ global		-- g_
+ macro		-- D_
+ enum         -- E_
+ union		-- un
+ 
+ */
 
 
 #endif /* __APPMACROS_H__ */

@@ -39,7 +39,7 @@ BevRunningStatus BevNodeTerminal::_DoTick(const BevNodeInputParam& input, BevNod
         me_Status = k_TNS_Ready;
         mb_NeedExit = false;
         SetActiveNode(nullptr);
-        
+
         return bIsFinish;
     }
     
