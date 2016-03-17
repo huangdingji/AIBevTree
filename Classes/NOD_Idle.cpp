@@ -14,10 +14,11 @@ void NOD_Idle::_DoEnter(const BevNodeInputParam& input) {
 }
 BevRunningStatus NOD_Idle::_DoExecute(const BevNodeInputParam& input, BevNodeOutputParam& output) {
     const BevInputData& inputData = input.GetRealDataType<BevInputData>();
-//    BevOutputData& outputData = output.GetRealDataType<BevOutputData>();
+    BevOutputData& outputData = output.GetRealDataType<BevOutputData>();
     f32 timeStep = inputData.m_TimeStep;
     m_WaitingTime -= timeStep;
     if (m_WaitingTime < 0) {
+        outputData.m_BodyColor = Color3B(rand()%256,rand()%256,rand()%256);
         return k_BRS_Finish;
     }
     return k_BRS_Executing;

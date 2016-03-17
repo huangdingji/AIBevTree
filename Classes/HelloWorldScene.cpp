@@ -2,9 +2,13 @@
 #include "AppMacros.h"
 #include "NOD_Idle.h"
 #include "NOD_MoveTo.h"
+#include "NOD_Breathe.h"
+#include "NOD_TurnTo.h"
 #include "CON_HasReachedTarget.h"
+#include "CON_HasFacedToTarget.h"
 #include "BevNodePreconditionNOT.h"
 #include "BevNodePreconditionTRUE.h"
+
 USING_NS_CC;
 
 
@@ -44,10 +48,26 @@ bool HelloWorld::init()
     m_BevTreeInputData.m_Ower = Sprite::create("bang.png");
     addChild(m_BevTreeInputData.m_Ower);
     m_BevTreeInputData.m_Ower->setPosition(Vec2(100,100));
-    
+    m_BevTreeInputData.m_TargetPosition = Vec2(450,300);
+    m_BevTreeOutputData.m_BodyColor = Color3B(255,255,255);
+//    BevNode& ret = BevNodeFactory::CreatePrioritySelectorNode(nullptr, "root");
+//    BevNode& p = BevNodeFactory::CreateParalleNode(&ret, k_PFC_OR, "parallel")
+//    .SetNodePrecondition(new BevNodePreconditionNOT(new CON_HasReachedTarget()));
+//    BevNodeFactory::CreateTeminalNode<NOD_MoveTo>(&p, "move to").SetNodePrecondition(new BevNodePreconditionTRUE());
+//    BevNodeFactory::CreateTeminalNode<NOD_Breathe>(&p, "breathing").SetNodePrecondition(new BevNodePreconditionTRUE());
+//    BevNode& p2 = BevNodeFactory::CreateParalleNode(&ret, k_PFC_OR, "parallel2")
+//    .SetNodePrecondition(new BevNodePreconditionTRUE());
+//    BevNodeFactory::CreateTeminalNode<NOD_Idle>(&p2, "idle").SetNodePrecondition(new BevNodePreconditionTRUE());
+//    BevNodeFactory::CreateTeminalNode<NOD_Breathe>(&p2, "breathing").SetNodePrecondition(new BevNodePreconditionTRUE());
+
     BevNode& ret = BevNodeFactory::CreatePrioritySelectorNode(nullptr, "root");
-    BevNodeFactory::CreateTeminalNode<NOD_MoveTo>(&ret, "move to").SetNodePrecondition(new BevNodePreconditionNOT(new CON_HasReachedTarget()));
-    BevNodeFactory::CreateTeminalNode<NOD_Idle>(&ret, "idle").SetNodePrecondition(new BevNodePreconditionTRUE);
+    BevNode& p = BevNodeFactory::CreateParalleNode(&ret, k_PFC_OR, "parallel");
+    BevNodeFactory::CreateTeminalNode<NOD_Idle>(&ret, "idle").SetNodePrecondition(new CON_HasReachedTarget());
+    BevNode& sq = BevNodeFactory::CreateSequenceNode(&p, "sequence");
+    BevNodeFactory::CreateTeminalNode<NOD_Breathe>(&p, "breathing").SetNodePrecondition(new BevNodePreconditionTRUE());
+    BevNodeFactory::CreateTeminalNode<NOD_TurnTo>(&sq , "turn to").SetNodePrecondition(new BevNodePreconditionTRUE());
+    BevNodeFactory::CreateTeminalNode<NOD_MoveTo>(&sq, "move to").SetNodePrecondition(new CON_HasFacedToTarget());
+    
     
     m_BevTreeRoot = &ret;
     return true;
@@ -56,12 +76,6 @@ bool HelloWorld::init()
 void HelloWorld::GameLoop(float _fDeltaTime) {
 //    游戏主循环
     m_BevTreeInputData.m_TimeStep = _fDeltaTime;
-    m_TimeToFindNewTargetPos -= _fDeltaTime;
-    if (m_TimeToFindNewTargetPos <= 0) {
-        m_BevTreeInputData.m_TargetPosition = Vec2(rand()%960,rand()%640);
-        CCLOG("%f,%f",m_BevTreeInputData.m_TargetPosition.x,m_BevTreeInputData.m_TargetPosition.y);
-        m_TimeToFindNewTargetPos = 5;
-    }
     m_BevTreeOutputData.m_NextPosition = m_BevTreeInputData.m_Ower->getPosition();
     BevNodeInputParam input(&m_BevTreeInputData);
     BevNodeOutputParam output(&m_BevTreeOutputData);
@@ -69,7 +83,8 @@ void HelloWorld::GameLoop(float _fDeltaTime) {
         m_BevTreeRoot->Tick(input, output);
     }
     m_BevTreeInputData.m_Ower->setPosition(m_BevTreeOutputData.m_NextPosition);
-
+    m_BevTreeInputData.m_Ower->setColor(m_BevTreeOutputData.m_BodyColor);
+    m_BevTreeInputData.m_Ower->setScale(m_BevTreeOutputData.m_BodySize.width);
 }
 
 void HelloWorld::onEnter() {

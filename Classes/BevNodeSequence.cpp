@@ -9,8 +9,17 @@
 #include "BevNodeSequence.h"
 
 bool BevNodeSequence::_DoEvaluate(const BevNodeInputParam& input) {
-    if (_bCheckIndex(mui_CurrentNodeIndex)) {
-        BevNode* oBN = mao_ChildNodeList[mui_CurrentNodeIndex];
+    
+    unsigned int testNode;
+    if (mui_CurrentNodeIndex == k_BLimited_InvalidChildNodeIndex) {
+        testNode = 0;
+    }else {
+        testNode = mui_CurrentNodeIndex;
+    }
+    
+    
+    if (_bCheckIndex(testNode)) {
+        BevNode* oBN = mao_ChildNodeList[testNode];
         if (oBN->Evaluate(input)) {
             return true;
         }
